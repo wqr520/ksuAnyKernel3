@@ -15,10 +15,10 @@ on:
           - SukiSU-Nova
           - BakaSU
           - FinaSU
-        default: FinaSU
+        default: SukiSU-Nova
       build_channel:
         description: "构建管理器通道"
-        required: false
+        required: true
         type: choice
         options:
           - "正式 (Release)"
@@ -37,7 +37,7 @@ on:
         description: "KPM 功能（仅SukiSU-Nova支持，开启未修补）"
         required: true
         type: boolean
-        default: false
+        default: true
       droidspaces:
         description: "Droidspaces 容器支持"
         required: false
@@ -55,7 +55,7 @@ on:
         options:
           - "仅上传 AnyKernel3.zip"
           - "上传全部"
-        default: "仅上传 AnyKernel3.zip"
+        default: "上传全部"
       ksu_mode:
         description: "KernelSU / SUSFS 模式"
         required: true
@@ -74,17 +74,17 @@ on:
         description: "启用 ZRAM 压缩算法"
         required: true
         type: boolean
-        default: false
+        default: true
       use_bbg:
         description: "启用 BBG 基带保护"
         required: true
         type: boolean
-        default: false
+        default: true
       use_net_enhance:
         description: "启用 网络增强 (BBRv3 + IPSet + Qdisc + CIFS)"
         required: true
         type: boolean
-        default: false
+        default: true
       use_rekernel:
         description: "启用 Re-Kernel 驱动"
         required: false
@@ -97,12 +97,12 @@ on:
         default: false
       cve_2026_43499_patch:
         description: "应用 CVE-2026-43499 rtmutex 修复链"
-        required: false
+        required: true
         type: boolean
-        default: false
+        default: true
       skip_incompatible:
         description: "功能不兼容或无法使用时自动跳过该功能（不中断构建）"
-        required: false
+        required: true
         type: boolean
         default: true
   workflow_call:
@@ -112,7 +112,7 @@ on:
         type: string
       build_channel:
         description: "构建通道（从 main.yml 传入；直接触发时取本工作流拉取的管理器来源）"
-        required: false
+        required: true
         type: string
         default: "正式 (Release)"
       version:
